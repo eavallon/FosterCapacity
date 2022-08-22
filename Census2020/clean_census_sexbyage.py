@@ -1,5 +1,4 @@
 import pandas as pd
-import sys
 import argparse
 
 def main(infile, moe=True):
