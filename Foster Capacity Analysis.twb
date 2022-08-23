@@ -12778,6 +12778,12 @@
         </metadata-records>
       </connection>
       <aliases enabled='yes' />
+      <column datatype='string' name='[:Measure Names]' role='dimension' type='nominal'>
+        <aliases>
+          <alias key='&quot;[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]&quot;' value='Cat Fosters' />
+          <alias key='&quot;[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]&quot;' value='Dog Fosters' />
+        </aliases>
+      </column>
       <column caption='CatFosters_per1000' datatype='real' name='[Calculation_6797339278421680131]' role='measure' type='quantitative'>
         <calculation class='tableau' formula='IF ISNULL([Total ]) THEN NULL ELSE ([FosterZipCode]/[Total ])*1000 END' />
       </column>
@@ -12989,121 +12995,6 @@
     </mapsource>
   </mapsources>
   <worksheets>
-    <worksheet name='Cat Fosters - ACS Household Income'>
-      <layout-options>
-        <title>
-          <formatted-text>
-            <run>Fosters by Income</run>
-          </formatted-text>
-        </title>
-      </layout-options>
-      <table>
-        <view>
-          <datasources>
-            <datasource caption='sexbyage2020_noerr_clean' name='federated.1y5328n1lkmq721cq54p40fm4gue' />
-          </datasources>
-          <mapsources>
-            <mapsource name='Tableau' />
-          </mapsources>
-          <datasource-dependencies datasource='federated.1y5328n1lkmq721cq54p40fm4gue'>
-            <column caption='CatFosters_per1000' datatype='real' name='[Calculation_6797339278421680131]' role='measure' type='quantitative'>
-              <calculation class='tableau' formula='IF ISNULL([Total ]) THEN NULL ELSE ([FosterZipCode]/[Total ])*1000 END' />
-            </column>
-            <column caption='DogFosters_per1000' datatype='real' name='[Calculation_6797339278421925892]' role='measure' type='quantitative'>
-              <calculation class='tableau' formula='IF ISNULL([Total ]) THEN NULL ELSE ([FosterZipCode (2019_dog_zipcounts.csv)]/[Total ])*1000 END' />
-            </column>
-            <column aggregation='Sum' caption='DogZipCount' datatype='integer' name='[FosterZipCode (2019_dog_zipcounts.csv)]' role='dimension' semantic-role='' type='ordinal' />
-            <column aggregation='Sum' caption='CatZipCount' datatype='integer' name='[FosterZipCode]' role='dimension' semantic-role='' type='ordinal' />
-            <column datatype='string' name='[Label]' role='dimension' type='nominal' />
-            <column datatype='integer' name='[Median income (dollars)]' role='measure' type='quantitative' />
-            <column caption='Total' datatype='integer' name='[Total ]' role='measure' type='quantitative' />
-            <column-instance column='[Label]' derivation='None' name='[none:Label:nk]' pivot='key' type='nominal' />
-            <column-instance column='[Median income (dollars)]' derivation='None' name='[none:Median income (dollars):qk]' pivot='key' type='quantitative' />
-            <column-instance column='[Calculation_6797339278421680131]' derivation='Sum' name='[sum:Calculation_6797339278421680131:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[Calculation_6797339278421925892]' derivation='Sum' name='[sum:Calculation_6797339278421925892:qk]' pivot='key' type='quantitative' />
-          </datasource-dependencies>
-          <filter class='categorical' column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]'>
-            <groupfilter function='member' level='[none:Label:nk]' member='&quot;Households&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
-          </filter>
-          <slices>
-            <column>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]</column>
-          </slices>
-          <aggregation value='true' />
-        </view>
-        <style>
-          <style-rule element='axis'>
-            <format attr='title' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]' scope='rows' value='Cat Fosters per 1000 Residents' />
-            <encoding attr='space' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]' field-type='quantitative' range-type='uniform' scope='rows' type='space' />
-            <encoding attr='space' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]' field-type='quantitative' fold='true' range-type='uniform' scope='rows' synchronized='true' type='space' />
-            <format attr='title' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]' scope='rows' value='Dog Fosters per 1000 Residents' />
-          </style-rule>
-          <style-rule element='map'>
-            <format attr='washout' value='0.0' />
-          </style-rule>
-        </style>
-        <panes>
-          <pane id='4' selection-relaxation-option='selection-relaxation-allow'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Multipolygon' />
-            <encodings>
-              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]' />
-              <color column='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' />
-            </encodings>
-            <trendline enable-confidence-bands='false' enable-instant-analytics='true' enabled='true' exclude-color='false' exclude-intercept='false' fit='linear' />
-            <style>
-              <style-rule element='pane'>
-                <format attr='minwidth' value='1417' />
-                <format attr='maxwidth' value='1417' />
-                <format attr='minheight' value='687' />
-                <format attr='maxheight' value='687' />
-                <format attr='aspect' value='0' />
-              </style-rule>
-            </style>
-          </pane>
-          <pane id='5' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Square' />
-            <mark-sizing mark-sizing-setting='marks-scaling-off' />
-            <encodings>
-              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]' />
-              <color column='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' />
-            </encodings>
-            <trendline enable-confidence-bands='false' enable-instant-analytics='true' enabled='true' exclude-color='false' exclude-intercept='false' fit='linear' />
-            <style>
-              <style-rule element='mark'>
-                <format attr='size' value='0.80160218477249146' />
-                <format attr='mark-color' value='#942193' />
-              </style-rule>
-            </style>
-          </pane>
-          <pane id='6' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Circle' />
-            <mark-sizing mark-sizing-setting='marks-scaling-off' />
-            <encodings>
-              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]' />
-              <color column='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' />
-            </encodings>
-            <trendline enable-confidence-bands='false' enable-instant-analytics='true' enabled='true' exclude-color='false' exclude-intercept='false' fit='linear' />
-            <style>
-              <style-rule element='mark'>
-                <format attr='size' value='1' />
-                <format attr='mark-color' value='#0096ff' />
-              </style-rule>
-            </style>
-          </pane>
-        </panes>
-        <rows>([federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk] + [federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk])</rows>
-        <cols>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]</cols>
-      </table>
-      <simple-id uuid='{4074F35E-5E60-4852-BE2B-B9457E7603E5}' />
-    </worksheet>
     <worksheet name='Cat Fosters by Zip'>
       <layout-options>
         <title>
@@ -13257,6 +13148,714 @@
       </table>
       <simple-id uuid='{3F9DEC07-6718-46E5-ABB9-4FD749230075}' />
     </worksheet>
+    <worksheet name='Fosters - ACS Family Income'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Fosters by Family Income</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='sexbyage2020_noerr_clean' name='federated.1y5328n1lkmq721cq54p40fm4gue' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.1y5328n1lkmq721cq54p40fm4gue'>
+            <column caption='CatFosters_per1000' datatype='real' name='[Calculation_6797339278421680131]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF ISNULL([Total ]) THEN NULL ELSE ([FosterZipCode]/[Total ])*1000 END' />
+            </column>
+            <column caption='DogFosters_per1000' datatype='real' name='[Calculation_6797339278421925892]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF ISNULL([Total ]) THEN NULL ELSE ([FosterZipCode (2019_dog_zipcounts.csv)]/[Total ])*1000 END' />
+            </column>
+            <column aggregation='Sum' caption='DogZipCount' datatype='integer' name='[FosterZipCode (2019_dog_zipcounts.csv)]' role='dimension' semantic-role='' type='ordinal' />
+            <column aggregation='Sum' caption='CatZipCount' datatype='integer' name='[FosterZipCode]' role='dimension' semantic-role='' type='ordinal' />
+            <column datatype='string' name='[Label]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[Median income (dollars)]' role='measure' type='quantitative' />
+            <column caption='Total' datatype='integer' name='[Total ]' role='measure' type='quantitative' />
+            <column aggregation='Sum' caption='Zip Code (ACSST5Y2020.S1901-income clean.csv)' datatype='integer' default-format='*00000' name='[Zip Code (ACSST5Y2020.S1901-income_clean.csv)]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
+            <column-instance column='[Label]' derivation='None' name='[none:Label:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Median income (dollars)]' derivation='None' name='[none:Median income (dollars):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Zip Code (ACSST5Y2020.S1901-income_clean.csv)]' derivation='None' name='[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Calculation_6797339278421680131]' derivation='Sum' name='[sum:Calculation_6797339278421680131:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_6797339278421925892]' derivation='Sum' name='[sum:Calculation_6797339278421925892:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]'>
+            <groupfilter function='member' level='[none:Label:nk]' member='&quot;Families&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='quantitative' column='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]' included-values='non-null' />
+          <filter class='quantitative' column='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]' included-values='non-null' />
+          <slices>
+            <column>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]</column>
+            <column>[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]</column>
+            <column>[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]' scope='rows' value='' />
+            <encoding attr='space' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]' field-type='quantitative' range-type='uniform' scope='rows' type='space' />
+            <encoding attr='space' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]' field-type='quantitative' fold='true' range-type='uniform' scope='rows' synchronized='true' type='space' />
+            <format attr='title' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]' scope='rows' value='Dog Fosters per 1000 Residents' />
+            <format attr='title' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]' scope='cols' value='Median Family Income (dollars)' />
+          </style-rule>
+          <style-rule element='legend-title-text'>
+            <format attr='color' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' value='Animal Type'>
+              <formatted-text>
+                <run>Animal Type</run>
+              </formatted-text>
+            </format>
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='4' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Multipolygon' />
+            <encodings>
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]' />
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]' />
+              <color column='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' />
+            </encodings>
+            <trendline enable-confidence-bands='false' enable-instant-analytics='true' enabled='true' exclude-color='false' exclude-intercept='false' fit='linear' />
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Zip Code:&#9;</run>
+                <run bold='true' fontcolor='#000000'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Median Household Income (dollars):	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Cat Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Dog Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='1417' />
+                <format attr='maxwidth' value='1417' />
+                <format attr='minheight' value='687' />
+                <format attr='maxheight' value='687' />
+                <format attr='aspect' value='0' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='5' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Square' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]' />
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]' />
+              <color column='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' />
+            </encodings>
+            <trendline enable-confidence-bands='false' enable-instant-analytics='true' enabled='true' exclude-color='false' exclude-intercept='false' fit='linear' />
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Zip Code:&#9;</run>
+                <run bold='true' fontcolor='#000000'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Median Household Income (dollars):	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Cat Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Dog Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.80160218477249146' />
+                <format attr='mark-color' value='#942193' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='6' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]' />
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]' />
+              <color column='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' />
+            </encodings>
+            <trendline enable-confidence-bands='false' enable-instant-analytics='true' enabled='true' exclude-color='false' exclude-intercept='false' fit='linear' />
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Zip Code:&#9;</run>
+                <run bold='true' fontcolor='#000000'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Median Household Income (dollars):	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Cat Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Dog Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='1' />
+                <format attr='mark-color' value='#0096ff' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk] + [federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk])</rows>
+        <cols>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]</cols>
+      </table>
+      <simple-id uuid='{8580D1C7-6CBE-49F8-BAFC-952EF49EF500}' />
+    </worksheet>
+    <worksheet name='Fosters - ACS Household Income'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Fosters by Household Income</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='sexbyage2020_noerr_clean' name='federated.1y5328n1lkmq721cq54p40fm4gue' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.1y5328n1lkmq721cq54p40fm4gue'>
+            <column caption='CatFosters_per1000' datatype='real' name='[Calculation_6797339278421680131]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF ISNULL([Total ]) THEN NULL ELSE ([FosterZipCode]/[Total ])*1000 END' />
+            </column>
+            <column caption='DogFosters_per1000' datatype='real' name='[Calculation_6797339278421925892]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF ISNULL([Total ]) THEN NULL ELSE ([FosterZipCode (2019_dog_zipcounts.csv)]/[Total ])*1000 END' />
+            </column>
+            <column aggregation='Sum' caption='DogZipCount' datatype='integer' name='[FosterZipCode (2019_dog_zipcounts.csv)]' role='dimension' semantic-role='' type='ordinal' />
+            <column aggregation='Sum' caption='CatZipCount' datatype='integer' name='[FosterZipCode]' role='dimension' semantic-role='' type='ordinal' />
+            <column datatype='string' name='[Label]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[Median income (dollars)]' role='measure' type='quantitative' />
+            <column caption='Total' datatype='integer' name='[Total ]' role='measure' type='quantitative' />
+            <column aggregation='Sum' caption='Zip Code (ACSST5Y2020.S1901-income clean.csv)' datatype='integer' default-format='*00000' name='[Zip Code (ACSST5Y2020.S1901-income_clean.csv)]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
+            <column-instance column='[Label]' derivation='None' name='[none:Label:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Median income (dollars)]' derivation='None' name='[none:Median income (dollars):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Zip Code (ACSST5Y2020.S1901-income_clean.csv)]' derivation='None' name='[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Calculation_6797339278421680131]' derivation='Sum' name='[sum:Calculation_6797339278421680131:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_6797339278421925892]' derivation='Sum' name='[sum:Calculation_6797339278421925892:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]'>
+            <groupfilter function='member' level='[none:Label:nk]' member='&quot;Households&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='quantitative' column='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]' included-values='non-null' />
+          <filter class='quantitative' column='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]' included-values='non-null' />
+          <slices>
+            <column>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]</column>
+            <column>[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]</column>
+            <column>[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]' scope='rows' value='Cat Fosters per 1000 Residents' />
+            <encoding attr='space' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]' field-type='quantitative' range-type='uniform' scope='rows' type='space' />
+            <encoding attr='space' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]' field-type='quantitative' fold='true' range-type='uniform' scope='rows' synchronized='true' type='space' />
+            <format attr='title' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]' scope='rows' value='' />
+            <format attr='title' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]' scope='cols' value='Median Household Income (dollars)' />
+            <format attr='auto-subtitle' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]' scope='rows' value='false' />
+          </style-rule>
+          <style-rule element='legend'>
+            <format attr='background-color' value='#ffffffb4' />
+          </style-rule>
+          <style-rule element='legend-title-text'>
+            <format attr='color' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' value='Animal Type' />
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='4' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Multipolygon' />
+            <encodings>
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]' />
+              <color column='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' />
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]' />
+            </encodings>
+            <trendline enable-confidence-bands='false' enable-instant-analytics='true' enabled='true' exclude-color='false' exclude-intercept='false' fit='linear' />
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Zip Code:&#9;</run>
+                <run bold='true' fontcolor='#000000'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Median Household Income (dollars):	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Cat Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Dog Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='1417' />
+                <format attr='maxwidth' value='1417' />
+                <format attr='minheight' value='687' />
+                <format attr='maxheight' value='687' />
+                <format attr='aspect' value='0' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='5' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Square' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]' />
+              <color column='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' />
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]' />
+            </encodings>
+            <trendline enable-confidence-bands='false' enable-instant-analytics='true' enabled='true' exclude-color='false' exclude-intercept='false' fit='linear' />
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Zip Code:&#9;</run>
+                <run bold='true' fontcolor='#000000'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Median Household Income (dollars):	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Cat Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Dog Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.80160218477249146' />
+                <format attr='mark-color' value='#942193' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='6' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]' />
+              <color column='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' />
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]' />
+            </encodings>
+            <trendline enable-confidence-bands='false' enable-instant-analytics='true' enabled='true' exclude-color='false' exclude-intercept='false' fit='linear' />
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Zip Code:&#9;</run>
+                <run bold='true' fontcolor='#000000'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Median Household Income (dollars):	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Cat Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Dog Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='1' />
+                <format attr='mark-color' value='#0096ff' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk] + [federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk])</rows>
+        <cols>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]</cols>
+      </table>
+      <simple-id uuid='{4074F35E-5E60-4852-BE2B-B9457E7603E5}' />
+    </worksheet>
+    <worksheet name='Fosters - ACS Married Couple Family Income'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Fosters by Married Couple Family Income</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='sexbyage2020_noerr_clean' name='federated.1y5328n1lkmq721cq54p40fm4gue' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.1y5328n1lkmq721cq54p40fm4gue'>
+            <column caption='CatFosters_per1000' datatype='real' name='[Calculation_6797339278421680131]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF ISNULL([Total ]) THEN NULL ELSE ([FosterZipCode]/[Total ])*1000 END' />
+            </column>
+            <column caption='DogFosters_per1000' datatype='real' name='[Calculation_6797339278421925892]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF ISNULL([Total ]) THEN NULL ELSE ([FosterZipCode (2019_dog_zipcounts.csv)]/[Total ])*1000 END' />
+            </column>
+            <column aggregation='Sum' caption='DogZipCount' datatype='integer' name='[FosterZipCode (2019_dog_zipcounts.csv)]' role='dimension' semantic-role='' type='ordinal' />
+            <column aggregation='Sum' caption='CatZipCount' datatype='integer' name='[FosterZipCode]' role='dimension' semantic-role='' type='ordinal' />
+            <column datatype='string' name='[Label]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[Median income (dollars)]' role='measure' type='quantitative' />
+            <column caption='Total' datatype='integer' name='[Total ]' role='measure' type='quantitative' />
+            <column aggregation='Sum' caption='Zip Code (ACSST5Y2020.S1901-income clean.csv)' datatype='integer' default-format='*00000' name='[Zip Code (ACSST5Y2020.S1901-income_clean.csv)]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
+            <column-instance column='[Label]' derivation='None' name='[none:Label:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Median income (dollars)]' derivation='None' name='[none:Median income (dollars):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Zip Code (ACSST5Y2020.S1901-income_clean.csv)]' derivation='None' name='[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Calculation_6797339278421680131]' derivation='Sum' name='[sum:Calculation_6797339278421680131:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_6797339278421925892]' derivation='Sum' name='[sum:Calculation_6797339278421925892:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]'>
+            <groupfilter function='member' level='[none:Label:nk]' member='&quot;Married-couple families&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='quantitative' column='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]' included-values='non-null' />
+          <filter class='quantitative' column='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]' included-values='non-null' />
+          <slices>
+            <column>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]</column>
+            <column>[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]</column>
+            <column>[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]' scope='rows' value='Cat Fosters per 1000 Residents' />
+            <encoding attr='space' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]' field-type='quantitative' range-type='uniform' scope='rows' type='space' />
+            <encoding attr='space' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]' field-type='quantitative' fold='true' range-type='uniform' scope='rows' synchronized='true' type='space' />
+            <format attr='title' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]' scope='rows' value='' />
+            <format attr='title' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]' scope='cols' value='Median Married Couple Family Income (dollars)' />
+          </style-rule>
+          <style-rule element='legend-title-text'>
+            <format attr='color' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' value='Animal Type'>
+              <formatted-text>
+                <run>Animal Type</run>
+              </formatted-text>
+            </format>
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='4' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Multipolygon' />
+            <encodings>
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]' />
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]' />
+              <color column='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' />
+            </encodings>
+            <trendline enable-confidence-bands='false' enable-instant-analytics='true' enabled='true' exclude-color='false' exclude-intercept='false' fit='linear' />
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Zip Code:&#9;</run>
+                <run bold='true' fontcolor='#000000'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Median Household Income (dollars):	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Cat Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Dog Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='1417' />
+                <format attr='maxwidth' value='1417' />
+                <format attr='minheight' value='687' />
+                <format attr='maxheight' value='687' />
+                <format attr='aspect' value='0' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='5' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Square' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]' />
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]' />
+              <color column='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' />
+            </encodings>
+            <trendline enable-confidence-bands='false' enable-instant-analytics='true' enabled='true' exclude-color='false' exclude-intercept='false' fit='linear' />
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Zip Code:&#9;</run>
+                <run bold='true' fontcolor='#000000'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Median Household Income (dollars):	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Cat Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Dog Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.80160218477249146' />
+                <format attr='mark-color' value='#942193' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='6' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]' />
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]' />
+              <color column='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' />
+            </encodings>
+            <trendline enable-confidence-bands='false' enable-instant-analytics='true' enabled='true' exclude-color='false' exclude-intercept='false' fit='linear' />
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Zip Code:&#9;</run>
+                <run bold='true' fontcolor='#000000'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Median Household Income (dollars):	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Cat Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Dog Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='1' />
+                <format attr='mark-color' value='#0096ff' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk] + [federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk])</rows>
+        <cols>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]</cols>
+      </table>
+      <simple-id uuid='{DB185474-69B9-4FAD-A046-802C8994118D}' />
+    </worksheet>
+    <worksheet name='Fosters - ACS Nonfamily Household Income'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Fosters by Nonfamily Household Income</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='sexbyage2020_noerr_clean' name='federated.1y5328n1lkmq721cq54p40fm4gue' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.1y5328n1lkmq721cq54p40fm4gue'>
+            <column caption='CatFosters_per1000' datatype='real' name='[Calculation_6797339278421680131]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF ISNULL([Total ]) THEN NULL ELSE ([FosterZipCode]/[Total ])*1000 END' />
+            </column>
+            <column caption='DogFosters_per1000' datatype='real' name='[Calculation_6797339278421925892]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF ISNULL([Total ]) THEN NULL ELSE ([FosterZipCode (2019_dog_zipcounts.csv)]/[Total ])*1000 END' />
+            </column>
+            <column aggregation='Sum' caption='DogZipCount' datatype='integer' name='[FosterZipCode (2019_dog_zipcounts.csv)]' role='dimension' semantic-role='' type='ordinal' />
+            <column aggregation='Sum' caption='CatZipCount' datatype='integer' name='[FosterZipCode]' role='dimension' semantic-role='' type='ordinal' />
+            <column datatype='string' name='[Label]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[Median income (dollars)]' role='measure' type='quantitative' />
+            <column caption='Total' datatype='integer' name='[Total ]' role='measure' type='quantitative' />
+            <column aggregation='Sum' caption='Zip Code (ACSST5Y2020.S1901-income clean.csv)' datatype='integer' default-format='*00000' name='[Zip Code (ACSST5Y2020.S1901-income_clean.csv)]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
+            <column-instance column='[Label]' derivation='None' name='[none:Label:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Median income (dollars)]' derivation='None' name='[none:Median income (dollars):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Zip Code (ACSST5Y2020.S1901-income_clean.csv)]' derivation='None' name='[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Calculation_6797339278421680131]' derivation='Sum' name='[sum:Calculation_6797339278421680131:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_6797339278421925892]' derivation='Sum' name='[sum:Calculation_6797339278421925892:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]'>
+            <groupfilter function='member' level='[none:Label:nk]' member='&quot;Nonfamily households&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='quantitative' column='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]' included-values='non-null' />
+          <filter class='quantitative' column='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]' included-values='non-null' />
+          <slices>
+            <column>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]</column>
+            <column>[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]</column>
+            <column>[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]' scope='rows' value='' />
+            <encoding attr='space' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]' field-type='quantitative' range-type='uniform' scope='rows' type='space' />
+            <encoding attr='space' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]' field-type='quantitative' fold='true' range-type='uniform' scope='rows' synchronized='true' type='space' />
+            <format attr='title' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]' scope='rows' value='Dog Fosters per 1000 Residents' />
+            <format attr='title' class='0' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]' scope='cols' value='Median Nonfamily Household Income (dollars)' />
+          </style-rule>
+          <style-rule element='legend-title-text'>
+            <format attr='color' field='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' value='Animal Type'>
+              <formatted-text>
+                <run>Animal Type</run>
+              </formatted-text>
+            </format>
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='4' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Multipolygon' />
+            <encodings>
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]' />
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]' />
+              <color column='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' />
+            </encodings>
+            <trendline enable-confidence-bands='false' enable-instant-analytics='true' enabled='true' exclude-color='false' exclude-intercept='false' fit='linear' />
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Zip Code:&#9;</run>
+                <run bold='true' fontcolor='#000000'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Median Household Income (dollars):	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Cat Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Dog Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='1417' />
+                <format attr='maxwidth' value='1417' />
+                <format attr='minheight' value='687' />
+                <format attr='maxheight' value='687' />
+                <format attr='aspect' value='0' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='5' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Square' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]' />
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]' />
+              <color column='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' />
+            </encodings>
+            <trendline enable-confidence-bands='false' enable-instant-analytics='true' enabled='true' exclude-color='false' exclude-intercept='false' fit='linear' />
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Zip Code:&#9;</run>
+                <run bold='true' fontcolor='#000000'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Median Household Income (dollars):	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Cat Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Dog Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.80160218477249146' />
+                <format attr='mark-color' value='#942193' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='6' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]' />
+              <lod column='[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]' />
+              <color column='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' />
+            </encodings>
+            <trendline enable-confidence-bands='false' enable-instant-analytics='true' enabled='true' exclude-color='false' exclude-intercept='false' fit='linear' />
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Zip Code:&#9;</run>
+                <run bold='true' fontcolor='#000000'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Median Household Income (dollars):	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Cat Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Dog Fosters per 1000 Residents:	</run>
+                <run bold='true'><![CDATA[<[federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='1' />
+                <format attr='mark-color' value='#0096ff' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421680131:qk] + [federated.1y5328n1lkmq721cq54p40fm4gue].[sum:Calculation_6797339278421925892:qk])</rows>
+        <cols>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Median income (dollars):qk]</cols>
+      </table>
+      <simple-id uuid='{3545CC3C-E3ED-4197-8CE8-530D8744B5F9}' />
+    </worksheet>
     <worksheet name='Travis County Population'>
       <table>
         <view>
@@ -13318,28 +13917,6 @@
     </worksheet>
   </worksheets>
   <dashboards>
-    <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Dashboard 2'>
-      <style />
-      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
-      <zones />
-      <devicelayouts>
-        <devicelayout auto-generated='true' name='Phone'>
-          <size maxheight='700' minheight='700' sizing-mode='vscroll' />
-          <zones>
-            <zone h='100000' id='4' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='3' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000' />
-              <zone-style>
-                <format attr='border-color' value='#000000' />
-                <format attr='border-style' value='none' />
-                <format attr='border-width' value='0' />
-                <format attr='margin' value='8' />
-              </zone-style>
-            </zone>
-          </zones>
-        </devicelayout>
-      </devicelayouts>
-      <simple-id uuid='{AED39CD5-6467-463C-BE23-307E962AEA11}' />
-    </dashboard>
     <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Fosters By Zip Code'>
       <style />
       <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
@@ -13408,8 +13985,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1050' minheight='1050' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='23' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='22' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='100000' id='29' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='28' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
                 <zone fixed-size='280' h='48000' id='9' is-fixed='true' name='Cat Fosters by Zip' w='64729' x='1600' y='2000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -13477,8 +14054,122 @@
       </devicelayouts>
       <simple-id uuid='{AB7E34AC-0515-4957-8A96-34ECC6E0E2A7}' />
     </dashboard>
+    <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Fosters by Median Income'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='100000' id='6' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='98000' id='9' param='horz' type-v2='layout-flow' w='49200' x='800' y='1000'>
+            <zone h='98000' id='7' type-v2='layout-basic' w='49200' x='800' y='1000'>
+              <zone h='49000' id='5' name='Fosters - ACS Household Income' show-title='false' w='49200' x='800' y='1000'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone h='49000' id='12' name='Fosters - ACS Married Couple Family Income' show-title='false' w='49200' x='800' y='50000'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+            </zone>
+          </zone>
+          <zone h='49000' id='11' name='Fosters - ACS Family Income' show-title='false' w='49200' x='50000' y='1000'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='49000' id='13' name='Fosters - ACS Nonfamily Household Income' show-title='false' w='49200' x='50000' y='50000'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+        <zone h='7250' id='10' name='Fosters - ACS Household Income' pane-specification-id='5' param='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' type-v2='color' w='14000' x='89600' y='125' />
+      </zones>
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <size maxheight='1250' minheight='1250' sizing-mode='vscroll' />
+          <zones>
+            <zone h='100000' id='19' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='18' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+                <zone fixed-size='280' h='49000' id='5' is-fixed='true' name='Fosters - ACS Household Income' show-title='false' w='49200' x='800' y='1000'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='7250' id='10' name='Fosters - ACS Household Income' pane-specification-id='5' param='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' type-v2='color' w='14000' x='89600' y='125'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='49000' id='11' is-fixed='true' name='Fosters - ACS Family Income' show-title='false' w='49200' x='50000' y='1000'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='49000' id='12' is-fixed='true' name='Fosters - ACS Married Couple Family Income' show-title='false' w='49200' x='800' y='50000'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='49000' id='13' is-fixed='true' name='Fosters - ACS Nonfamily Household Income' show-title='false' w='49200' x='50000' y='50000'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{AED39CD5-6467-463C-BE23-307E962AEA11}' />
+    </dashboard>
   </dashboards>
-  <windows source-height='48'>
+  <windows source-height='93'>
     <window class='dashboard' name='Fosters By Zip Code'>
       <viewpoints>
         <viewpoint name='Cat Fosters by Zip'>
@@ -13497,46 +14188,24 @@
       <active id='-1' />
       <simple-id uuid='{40A70B52-0DF5-4340-A9E8-79B71D306600}' />
     </window>
-    <window class='worksheet' maximized='true' name='Cat Fosters - ACS Household Income'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='31'>
-            <card type='title' />
-          </strip>
-        </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card pane-specification-id='5' param='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' type='color' />
-          </strip>
-        </edge>
-      </cards>
-      <viewpoint>
-        <highlight>
-          <color-one-way>
-            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:F1 (2019_cat_zipcounts.csv):ok]</field>
-            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:F1 (ACSST5Y2020.S1901-income_clean.csv):qk]</field>
-            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]</field>
-            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]</field>
-          </color-one-way>
-        </highlight>
-      </viewpoint>
-      <simple-id uuid='{0EC51616-801C-4F0B-BB3F-89D30F66B95E}' />
-    </window>
-    <window class='dashboard' name='Dashboard 2'>
-      <viewpoints />
+    <window class='dashboard' maximized='true' name='Fosters by Median Income'>
+      <viewpoints>
+        <viewpoint name='Fosters - ACS Family Income'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Fosters - ACS Household Income'>
+          <zoom type='entire-view' />
+          <highlight field='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]'>
+            <bucket-selection />
+          </highlight>
+        </viewpoint>
+        <viewpoint name='Fosters - ACS Married Couple Family Income'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Fosters - ACS Nonfamily Household Income'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
       <active id='-1' />
       <simple-id uuid='{0306308D-DCA5-4A70-9C29-42D0E9BB9998}' />
     </window>
@@ -13609,6 +14278,158 @@
       </viewpoint>
       <simple-id uuid='{A1B6CE01-CA8D-4534-A9A6-B09C66A61837}' />
     </window>
+    <window class='worksheet' hidden='true' name='Fosters - ACS Family Income'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='5' param='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:F1 (2019_cat_zipcounts.csv):ok]</field>
+            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:F1 (ACSST5Y2020.S1901-income_clean.csv):qk]</field>
+            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]</field>
+            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{AFF50ED9-276F-4D91-8668-3E188AFB2F12}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Fosters - ACS Household Income'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='5' param='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:F1 (2019_cat_zipcounts.csv):ok]</field>
+            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:F1 (ACSST5Y2020.S1901-income_clean.csv):qk]</field>
+            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]</field>
+            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{0EC51616-801C-4F0B-BB3F-89D30F66B95E}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Fosters - ACS Married Couple Family Income'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='5' param='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:F1 (2019_cat_zipcounts.csv):ok]</field>
+            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:F1 (ACSST5Y2020.S1901-income_clean.csv):qk]</field>
+            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]</field>
+            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{52BE8BE8-0A38-45E8-853E-A3C6B9A7BEFF}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Fosters - ACS Nonfamily Household Income'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='5' param='[federated.1y5328n1lkmq721cq54p40fm4gue].[:Measure Names]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:F1 (2019_cat_zipcounts.csv):ok]</field>
+            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:F1 (ACSST5Y2020.S1901-income_clean.csv):qk]</field>
+            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Label:nk]</field>
+            <field>[federated.1y5328n1lkmq721cq54p40fm4gue].[none:Zip Code (ACSST5Y2020.S1901-income_clean.csv):ok]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{C413467A-A3C8-4968-BBAC-04654C2B15CF}' />
+    </window>
     <window class='worksheet' hidden='true' name='Travis County Population'>
       <cards>
         <edge name='left'>
@@ -13642,184 +14463,6 @@
     </window>
   </windows>
   <thumbnails>
-    <thumbnail height='192' name='Cat Fosters - ACS Household Income' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAAA7DAAAOwwHHb6hk
-      AAAgAElEQVR4nO2deXRcV5ngf/e9V/uiKi2WLCuWbTm2szixEzsJnYATQgIdEpZmaegJMyzd
-      zJzQdB96YBh6aIYA3YfphpmBzNADHDgMMyyT4Q8azjRLk0AnbTqEQGIn8apEXrRYstbaq95y
-      549XVbbsklRSbZJ1f+f4RCm9d99XT99373eX7/uElFKiUKxTtFYLoFC0EqP0QyqVwrbtZd2c
-      z+cZHx9n8+bNADiOQzweX/I+KSVSSjStMfZn2za6rte9XcdxABoid6NkhrUrt23baJqGEKIh
-      beu6fsEAwuHwshs5duwYuq5jWRbxeJxEIlGVEZUMoFHe13INuVoaKXejZAbXAIQQa1JuKWXD
-      DAAuGgFWwubNm3nhhRfo6+tDCFH+Vy2N+GKldtda282QeS3IPZ23AIh5DYQQDfMSSnLXZAC6
-      rjMwMEAkEim/hGoEbuSQXGq/EW03Uu5GyQyUe9HVLrctJf/6H4cA+MIdW9gYMBpmuCW5azIA
-      n8+Hz+erl0wKRdOpyQAUinqiAd949XYAQh4NWRxxG4kyAMWqQQhBxHthRalx0+sLqH0AxbpG
-      GYBiXaMMQLGuUXOAdcaJ2SyHJtN0B728qjfaanFajhoB1hnHZrJ8d3CKn4/MtVqUVYEaAdYZ
-      G4NebtkQZktU7d+AMoB1x/7uMPu7l3/u60pFuUCKdY0yAMW6ZtW5QI6U/IenzgDwoRt72RD0
-      tFgixZXMqjMAKeHEXA6AQhPOgijWN6vOAISAf3NdNwAx36oTT3GFUZOGlUIi+/r66nYmXBOC
-      e66K1aUthWIpajKA0dFRzp07RywWIxwOI6WsOkTOaaB74zhOQ0L1SiGFjQgtbJTM0NhQzkbK
-      3QwdqckALMuivb0d0zTLn1UTvVOKUFprYYtAw2JUmyHzWpO71G4j5a7JAPr7+5mcnCQej5ej
-      96/0kMi1EFp4KWslJPJSSplDVm1IpNfrpbe3t14yKRRNR22EKdY1ygAU6xplAIp1jTIAxbpG
-      bbUqWoqUkg//8jQAH9nbS0/Q29TnKwNQtJxTyTwABbv5mfqVAShazp/s7gGgw998dVQGoGgp
-      QggObGpr2fPVJFixrlEGoFjXKANQrGuUASjWNcoAFOsaZQCKdU1NBpBOpxkeHqZQKNRLHoWi
-      qdRcIimRSNDR0VGu6FdNGFspPK9RIW+NaruRlS0b/T6gMSGGzfg7NiIgptR2TSNAqT6s3+9f
-      kQBrjbUoc4m1KHszZK5pBLBtm4GBgXllOKsNidQ0bc2FRJZYi6GFKiRyPnUJiTQMA8NQpykU
-      axe1CqRY16juW9E0xjMFvnj4HACfufWqhqVTWQ7KABRNI29Ljs1mWy3GPJQBKJpG3Gfw/mu7
-      Wy3GPJQBKJpGxKvz2s2rK++rmgQr1jVqBFA0HHdDSwKNyyO6UtQIoGgoUkoyv/4Z5z//QbKH
-      D666HWk1Aigai2OT+OHXMIdPIs08gd2/41ZBWSWoEUDRWDSd0O33Y2zoI/g7960q5QcQso5j
-      0tzcHG1tS0f4l06Olg7T1RvLshpyRKORad0bJTO4Z7YadRaoGrmllODYoOnLmgPYtt2ws0Al
-      uZULpGg4QgjQV6eqKRdIsa5RBqBY19RkALlcjsHBQSzLqpc8CkVTqckxGxoawjRNLMtCCIHj
-      OFUZQyOrFgINrbYIjQktbJTMcKG22VqUu1EhkSW5azKAcDjM9PQ0qVSKzs5ON8KmipWMRq8C
-      AWtuFQgaIzM0dhUIGit3o1aBgNpXgfr6+ti4cWNDFVmhaCQ1GYAQQoVEKuqGlBKZSyMdBy0Y
-      acoz1SqQYtVgz01x7tPv5twn3kHhzPGmPFMZgGLVYE+NYZ07jT09jjX6clOeWdF/SafTHDx4
-      EK/Xy5133tkUQRQK75ZriL3jQzjZFIE9B2jGudGKBlBKd9LT09MEERQKF6EbRO/9g/L/N3KJ
-      tURFF+j48eOMjY1x/vz5hgugULSSigYwMDBAOBymo6Oj2fIoFMvmseE53v3YSX4wNL3seysa
-      gKZpmKbZ0PSCCkW9KDgOSdMhby9/p3tBDZdSks2urhwuCkUlbtkQ5uH9V3FiNscnnj7DbyZS
-      Vd+7oAHYtq0OuSnWBB1+D9d3BEmaNi9OZ5nJV6+3FVeBnnvuOQzDYGZmpm5CKhSN5oEtcWYL
-      NjtjgarvqWgA+/fvJ51O09nZWTfhFIpGc/vG6LLvqegCjY6OYlmWcoEUVzwVR4BYLMa5c+dW
-      XRIjhaLeVBwBQqEQsViMLVu2NFkchaK5VDSATCbDxMQEZ86cWfTmVCqlQiLXGFJKpGOvugxt
-      raKiCzQ8PMyuXbsIhUKL3jwzM0M+nwfcZVMVErlymhUSmT/6NMnvfxn/3gOEX/uumhNVXZEh
-      kUeOHOH06dPce++9izYSjUaZnZ0lmUwSj8dVSGSNNCMkcvbJv6Pw8gtYE8O0ve5BhOGpuf0r
-      LiTyvvvuw7IsPJ7FX04kEmHHjh14vd6GCKioP6EDb8aaHiew9wDotSv/WqeiARw+fJhUKkUs
-      FuPmm29e8GZN0/D5fA0TTlF//Nfeiv+a/SAa17OuJSoaQOkgXKFQaLY8igYjhAChkhiUqGgA
-      uq6TzWZVtgfFinl+Ks3ZVIEtER/XtgdbLc6CVJzNqSUyRa08OZrka0cneGo82WpRFqWiATiO
-      g2EYDVnuU6wPekNero0H6Amu7gWSii6Qx+Mhn8+3xAWSUkKpptQ6nqgNzuU4PptlQ8DD/g3h
-      VouzbN60rZ03bWtvtRhLUnEECAaD+P1+Jicnmy0PMpdh8r//OyY+9wHsqXNNf/5q4dBkmq8f
-      neAfzs62WpQrmooGYBgG+/btY9u2bc2Wh8LZE2R/+wvyR39N7uivm/781UJXwMP17QH6I2qZ
-      uZFULJGUz+c5ffo0O3bsWFZj9SiR5BTypP/pB8hCjtAdD6CHl19YWZVImk+rSyStlJaVSNI0
-      jUOHDpHL5bjhhhvq/vDF0Lw+Iq9+W1OfqVi/VOwSstksiUSiJXMAhaKZVDSAcDiMlFKFRCqu
-      eCoaQCqVore3l6GhofJxZ4XiSqTiHCAUCrF161bAPRekDrwprlQWPAw3NzeHEIJweO1twigU
-      1bLgWaCJiYkllzSllBw6dKgpWXwVikaw4ALu6OjokvsAIyMjpNPpchikColcOapK5OW0LCTS
-      MAy2bdu25AZHNBolGAxi2zY+n0+FRNbIWtwIg7UdElnxjZimydmzZxkZGVm0gWg0yp49ewgG
-      V+95b4ViMSqa7vj4OP39/SouQHHF8NOzswynCuzfEGJ3x4VsJxUNIBqN4vV66erqapqACkUj
-      eXo8xbOTadp9+tIG4PP5GBwcVCGRisvIWQ4p08bQBDHf2qkRvaczSNxnsPmS07UVv4HX62Xj
-      xo1qA0xxGU+MJfjyi+PsjPn5q9v6Wy1O1dy/pXJwTsVJsGVZOI6DaZoNFUqhaDUVR4Bjx47R
-      29vLnj17mi2PYpVz16Y2bu+JoC2xNOmGtjqrPqy14giQz+c5e/YsR44cabY8ilWORxOEPDoB
-      Y+E9BSkl6YM/ZPwv30vm6X9Y1auJFUeAffv2kc1m1UnQFiItE3PsFEZnL1pg8STFqw7HIfnT
-      72CePUHyZ98luP9uMhYMpwvoQjDQ5m+1hGUWLJT9ox/9aMn06IrGIKVk7gdf5dzDDzL5pY8i
-      nTV21krTCN/9djz9uwi/+m0gNAYTOT721Bk+85vhVks3j4ojwLZt2zh48CBzc3PNlkdRxJoa
-      A9vCmhwrpolZGNuRPHPeLQ26pzOET29tfWchBOFXvYnwHW+A4lEGTQh8usCnra75wIILufv2
-      7VMuUAuJvfVP8PZfg3/XzaAtvh+Tdxz++tlRAP72wDY2BFpf4FwIARftI13fHuTb9ywvyUIz
-      qPimnnrqKfbu3auS47YIIQRGvIvovX+Ad/POJVdRNATdAQ/dAQ96FR1s3nb48ZkZfnxmZkXV
-      1a8kKo4AAwMDPP744+zatavZ8ihWgN/Q+NKB6nM4ZS2Hrx6ZAOC27kjTXCbp2BROHUV4/Xg2
-      DayK5dGKBtDf309//9rZ5VMsD0MT7CoWkzaa6JPnXniK84/8W4ThoeeT38LTvblpz16ItXOY
-      Q1E3wh6dv7yt+conLdOd0DsOrJIowpoMIJFIMDw8zNatWwkEqi9Pr6gN6ThknnkM8+xJIve8
-      Az3avCS0UjrITArhC4C+PPUJ3HgHXX/6XxD+IMbGLY0RcJnUZADBYJCpqSn6+/tVlcgaWY7M
-      9swE09/4DDKbQgpB5A1/tOj19QyJzP7qJ8x99/P4rtlP7H0P47A8F8pzzS1Add93qZBIR8Kx
-      mQwAV8cCeJbhzi0aElktiUSCtrY2TNMkFAqpkMgaqVZmLdKG96odFIZP4tuya8n76hkSWTj5
-      HE5qjvyx36A7FsLjr9u7Nh2JWXzHeVti2W6HUyh+lrMlueKqVaJgk7cdHnnezSD+9oEOJOBI
-      iSUlKdPBr2tkLQdbSry6IFGwMYRAAmnTIur11GYA8XicWCzWMIVQVEb4gnR96AvIXAatrX7u
-      j5SSos5hS1nef7OKP1iOJPHKt5PMWjjb9zKbEdhOlrTtXltwJBnLVdC0aWNJiYYgadqI4v0Z
-      y8HQBCnTRhMCf1ExQx4dIdwpQsSjYzoSjwZ+XcOUkohHRxcCXQjCXlffdCEIFc8kDbT5ifl0
-      /LpWXtXy6gIBaEKURwdDCHRNlJPjVswOvVLqkR26Hlyp2aGllCRNGynBlJKM6cqTsRwsR+Ig
-      SRZsJG4Pmi0qY8q0sByJxFU2cPcC8rZD2KuTKrgBLh5NkLUcwh4dS0oc6U6YM5aNX9eKCiWI
-      enUE7gpSQAdd0wgYOt6iksV8Oidmc0gJO2J+Il5XMQ3NVciQp7q/e8uyQysWJm87SMft8XK2
-      g8Q9ilBw3H4kZdpYDkjkPGUrKWPSdIdk25GkTBufrpG3JQXbJmDozBWVESBt2UQ9OjnbnS+F
-      PDpSQsBwlVFKaPO5yuTRBEHD/Tnk0QjoGnGfTtRrIB0Hn6ERLCpeqTeFC4XiL1YxAVUr3UKG
-      +zfPjjKZs/jzmzZxdWz1LpCsOQNwLh6mHYlbTElS1C9ytkOmYKJrNknTdpVNQrKojDnbmedH
-      CtzJVNqy0YXbA5pSogtBomARMNzeLmPZRDw6tiPRi0eCC7Yk6NHQBdjOBWX0aVr5uHDYoxEw
-      DDr8gkhRAX26KP/eo7m9qmPb+L3un6M0TNeLRqdFqUTIo5O3nabuM6yEurtA4Wh0nrLli9qa
-      LNg4SCxHkirYSCQ5+8IEZzbv3lNwLvSWadNBCPDpGsmCTcijFX1Nh6jXIFv0J336haHbEAKB
-      pK0Yr3qxTxj16mjC9R1LyujVL/iHQcP1Q3UhKp53b7ULtFJUgYzLaYgLdHgqw7OnM0ggWpzU
-      GEIQ9uhIJH5Dw69rSCmJeDQiXq0cYAEQNDS8moYQF+6/mHnD9CIvpZF/FMWVRV215IaOIK/c
-      1vpJsEJRLWr9UtEUnFyGxE++RebZX6yqEEllAIqmkHri+8x+9z8z9eWPY51fPVFhygAUTcHY
-      cBXCH0Tv2IgWiJQ/v3AsxqlpZJBSkn7mMaa//TnM84vntJ0n14qfqFhTHDyX5KVEnuvagy2p
-      PB+48Q42fuq7iEAILXRhnijNPDP/+z/hpJPEH/woRry6dJxSSrAtdyND05HZFDPf/Cuc5CzY
-      FvEHP3rx1TipOZzkDHbxv+bsFGSTygDWCk+PJxlNF9gZD3BNfPnZuJ89n+Yfx5IALTEAIQRG
-      16bLPjdPHyf95A8BSeDGOwi/6k2LtiOlRObSmKNDTH39YYTHR/R1D2LPTrnHrIH8yeeY+srH
-      kZYFsri8PnQEe+Y8wVvvJXDD7RidvRjRuDKAtcITown+eTzF2wY6VmQA18QDCCHYvopSkkjp
-      YHT34d2xBycxjRaJkzvyNHZyBic5g5WcRebSyFzG/We5mQqFL4CTmsMaHQIE5tgpfNtvZMNH
-      v4IWiqD5Q6B7EIYHoetIy2T0I/eDdJC2RfC238W2bXUUYi2xNeonZ0s2Bj0ruv/uvjbu2Ryv
-      s1QXcDPBufvy2LarxIlp7MS0+3NqDic1i5OcxU7NujcJgfB48XRtQmwaoHDqCHqkHS0Sw7Nx
-      K56rY+jBCFoghOYPIowL391OJ5j7/pcRXj/R178HzbuIYes6gX2vIfvMYwT2vGrer9RhuGWw
-      HneCnXwOmUvjZJI4mWS5d3aSs9iJaazkLMKxy70rCIRuoEfjaJE4eiSGFo7N/znchlgi00VJ
-      7nrtBEtZjELTDYQQ9dsJllKuiuBmxdLIQh7HzINZmKfMdmoOJzGNk0kicxmcfAZZyIHjIHwB
-      tFAULRB23YtQDC0ax9O7DS0SR/qCGD6/2zsXlavp38txcJIzaJHYgoYlhAYVjrfUHBDz8ssv
-      s23bNqLRaC1NKZZB2d2QDkiJnZwt9soz2Be5GU5qFiedwMnnEALXJ/b4EF4/WjCC1taBHmrD
-      6NyIvvVatGAY4QsifEE0X3VzBcuy0C4ZuaSU4NhI23Kf12CjSD35feb+7yNEXv8eoq9717Ke
-      V5MBeL1ehBDlQnkqJHLl2LYNjl12NZx0Ejs5jZOaw07OIJOuQpfcDTeoXAICLeK6GCLU5roX
-      3f34tt/o9tzhNqTuQQhRlWIUvXicKv6OZbkvbSOfZfp/fAxzeJD4Hz6Mb+fNy3oXJaqtEpl/
-      6QWcdIL84PPYRTfsUr49OM3gXI7X9EX5ne5wfUIip6en8fv9qkpkBaRVQBYKSDOHk8vgpGax
-      E25PbSemcFJzyHwWa2oMJzmLCEXdCV8wjChN/CJxPJE4vp7N6JG4O8QbXoRuuO5GlT59s6tE
-      WjMJCiefc7/f4CFC1926onarnQO0PfA+jFgnwVfch76AG3YmVeDFmSw3dYXK8qqIsCq42N1w
-      bAsnk4L0XHlDxS5OCJ30nOtuZFPuerTHi+YLILx+dwc01IYWjRcVOY4WimKOnWLyi38GUtL2
-      7o/TduDNdZH5Upp9HFraNsnHH8UcHqTtje/HaO9eUduLGUDOdnh+yg2Iv6krVA7wWYhfT6Q4
-      nzXZFQuwrc2vIsIAV2EzSfe/6cSFSWFp2S6fAdtGOm7gjESgBULo0fbiqkYcY0Mf2tZrXQUP
-      t6EFqt9k0oIRPH3bcbJpPFftbNwXbTJC14ne886GPmM2b/HZ37pHHr59z9XoS+SEXGjz74ow
-      AOnYyEIOWcgj81kKc1OYFyl0SZllPucqteOAdNyJYCBc9JVdP9pz1Q584Tb0SBzhC7juhqYj
-      dL3uy6BaOEb3x7/h+v7GwvXYpJTYU+fIv3QY/3W3ooXa1v3Kmy4EGwK1q++qc4Gk4xQV1EYW
-      8sVVjRnsxAxOctpd8cgkXZcjlQAkQjdcV8PrRxheCLfhaeu4sPZcVGbNF0T4/K5Sr4BW7QNI
-      22b8s39IYfAwwdvvp+N9n1yWAaiIsMtpugvk5DJFHzmJnZzDTkwj0xf50ZkklFYehHDzyhte
-      V4lLmyptXXj6rkYruRuhaMWXc8VFhAlcw0YgPKpyZz2p6wgw+fzTGCefwckWz28UsvPOb2jB
-      aFlxtXAM/SLl1oIRd1VD01fcQ5dYKzvBUkoe/NlJAD6zv4+tscpnfKSUOKlZCmdO4BvY7bpm
-      agRYlEcHJ/m7oWle0RPhj3dvvOz3DRkB9LZOQre+DhEIuZstPn/FHkuFRF4gV0wasFg/JIRA
-      j8QJrHA5cT1iOpKcLSnYi/fvq24OUA/W0ghwYjYHQF9QJ+Tz1qXdS3FHABCOU/fjCqt1BDif
-      NZnOWUS8Or2hy9+rWgZdBQgh2Bl3k0ZVs4NeC4m//5+kf/49oq9/D+G73npFrCJJxyF37Bmw
-      TPzX3TrPde4KeOgKLH1yVoVErgcch8xTP8GeHifz9E/LRffylkPGtMoJadcahdNHOf9f/5Tz
-      X/wz8ieeXVEbygDWA5pG9I3vx3/jK4ne/14QAikljz/6DZ74xPs5/OtftVrCFSEML0Ir7tMY
-      F9wcKSXW1BiJH32TwvDg4vMrNQeonrUQDyDNAtbMBEZ7dzmApLQKVHJ7hBBIy2T4Q7+Lk5oh
-      sP8eNjz02ZbKXYml5gBSSvLHf4M0C/ivu618NkpKyeR/+wjZ3/4cT/8uNnzkb5GZJHp8w2Xx
-      AGoEuIKQ0mHmO5/n3F+8ndnvPXJZzzfvRKiuE37lG/D0bCZ0670tkLZ2rPMjTH31PzL1tU9i
-      jgzO+52xoQ90D3qsi8lHPszYX7ydc598kOzhf5r3XtQk+EpCSgpnTiALeQpnjru+/gK9pxAa
-      sbf9MbG3PLRkHeLVij0zgT0zAUjs6XG4yq1DLIQg9pYPELr9frRghHOf/BfIfA5zZJD0kz8g
-      cMMd5TaUAVxJCI1n736IEd9P6L/z9bxmiZUeITRocVX5WvBtv4H4v/pzsAr4rr1l3u+E4cHb
-      tx0pJR3v/zSZp3+Kee4M4bveOu86FRJ5BSGE4FTkKn62+23cF4qtib+LlJLcC78k9+LThO96
-      S1WlU6WU2HOTmGeOE7rlHoQ/tOB3FUIQuP4V+K+7rTwiXnxtTQaQTqd5+eWX2b17dy3NKOrI
-      rd1huoMeBqILhzRKKbEmzgLFjG2tNBTLZOrrn8KZncROztD5R59a+h7pMPmlf0/h5CFCd/4e
-      7f/yY0veIoSo6A7WXCXS7/e7Z1WK4WsqJHJl1EvmG+J+boi7yl/6W1xaJbJw+hhTn3sIgI4P
-      fwlv/64VP69muSX4tt9I7sVf4dl63Tz9WTAk0nFjNEAibXvBMMhq5K55BEilUuTzefx+vwqJ
-      rJFmpUWxzBzSzAOgFXI1P3el90spKYwMooWitL/3EwRvunNeVoeFlkGl1Ol66LMUho7i23Uz
-      mm4gLZPUY/8HaZlE7nknmm/pskw1H4UIh8Ps3bu3liYULcB39R46i+v+vh17WieIlMw++gXy
-      R56mcOoowb13VnWbEAKjvQejvaf8WX7wELOPfgEAz8atBG++q6q21CrQOkToBsGbqlOQxgoi
-      mOm7HnHieZJ919FTQz0xo2sTxoarkLaF0dNfvQhqJ7h61sJOcCVWczzAwZFZjg+P0d+zgbv7
-      O+b9bjmnQaWUyGwKKaUbW7LEPZZl8ejLM2oEULSW2zfFuH1TrOZ2TEfynTNZAN4yECJcRS3i
-      Z86nlQGsVR45PMZ03uL3t3eyK7566/A2C8uR/ODUDAD39cerMoC7NkWVAaxVjs1mOZcxed3m
-      xsYRVIO7mfXPZJ970t3M2jTQ9L0FXRPc2eum5/RXubv9wJZ2ZQBrld/b1kHGtNkcXgVB8rbF
-      9P/6LPb5Eey5STo/8Nc1Nykdm8KpoxjxTox495IG5dM1PnjD5bG/AD8cmmYyb/HKjRG2t80f
-      LZUBrFHu7lt6saFpaDr+a/aRSSfw7bypLk2mf/n/mP76p9E7euj5xDfRIyuvbfDEWIKXE3m2
-      RHzKABT1R2ga7e/6GLG3frBuSbucbBqkROazbqmjGti3IUx/xEdPheIiygAUdeFrJ6Z5firD
-      ff2C125e3qrOj8/MMJo2uaU7zPXtbmqY8IE3I0JteLr70GOdNcn2+9sXvl8ZgAKA0XSBjOXQ
-      6TeI+ZavFpM5i+F0gaS5/LNBvxpPcXgqQ1fAKBuA5vUTvPW1DcsMV0IZgAKArxwZ5/mpDO/e
-      1cUDW9qXff8bt8Z55cYImyOXT8qPTGcYzRTYHPaxI3b5ku3ezhBdfk9zJ/RSkvrl3ysDULgY
-      QmBoYsk04wuxWOXKx0fm+PlIgvv74xUN4A1bl29wtWKnZpn51t8oA1C4fHxfX8Pa7g542N7m
-      p6sO2ZzrheYP4tu5V50FWg7qLNDlrNbMcEthWRa6dFRIpGJ1ciaZ58dnZoh4dN65o6viNTnb
-      4cMHTwHw8C1X0eFfXg1l4fHWlhZlYmKC559/nmw2W0szCsVlnM+a/OTsHL8YTSx4jZQwljEZ
-      y5hYKwzSq7lMam9vL6lUCq/Xi2VZZLPZsqtQGnYvDpvTi5VWSsNbaYirdE3JOysN3Ze2u9A1
-      juOg6/pl1+i6Xg7fXEq+Su2WPjMMY9nyLfVsx3HweDw1fe+FrrmU5X7vxZ5dcq9W+r0XenZE
-      2LymL0rY0MhkMpWfLeGhHe6eQwCLdLpQtRxSytqL5E1NTTEyMsLOnTvx+XxqDlADag5wOau+
-      QkxHRwcdHR1LX6hQrFLKBpDP52vO0tCIbAkKRSMpG0AzV3Ia/ay1uCrVSJnXatuNpCR32QC8
-      3tqrk+RyuWUL0Aga1fZalFm1vXjbTd2aa1QirEvbrveLa6TcjWStyl0xGVYdKCVju3gxoGkG
-      IKXk9OnTJBLuuq7P5x580nWd7du319z+6OgoExMT+Hw+pJT4/X4sy2LHjh01v8zh4WEymQzZ
-      bLacAEzXdQYGBmpqV0rJU089xfbt2xkdHcUwDLxeL8FgkE2bNtXc9qFDh+jr6+Ps2bP4/X48
-      Hg+aprFt27aa2jZNk5deeolcLufm6CnKHYlE6OnpWbqBRXAch2eeeYa2tjYymQw+nw+v14vH
-      46G/v/p0J5U4deoUs7OztLW1kUgk8Hpr3AhbDqW1/u7ubvx+P0IIBgcHq1o2rQa/30+hUMAw
-      DDweD2fPnsXn89Ws/JZlMTQ0xNzcHMFgECklx48fp729Pge44vE4w8PDdHV1kcvlOH78eF1W
-      1mzbJp1OMz4+TigUwnEcjhw5QldX5V3V5eDxeNB1nZ6eHnp7e8lkMpw4caIu76S0R2SaJtFo
-      FMuyOHLkCJ2dtcUEAAQCAVKpFNPT02zevJmJiYnmnQWSUvLiiy/S0dFBOp3G7/fj9XopFAr0
-      9dV+EOv06dPk8/nyCBAKhcjn82zatKkmI5BSYts209PTzM3NEQgE8Pv95HK5muW2LKvcCczO
-      zhKNRgkGg+RyOTZurBzfuhy5BwcHCQQCpNNpQqEQgUCAbDZbs9xSSsbHx+ns7PhVADUAAAGe
-      SURBVOT48ePE43ECgQD5fL7mEcC2bU6cOEEkEiGVShEOhwkGg2Sz2ZpHxUQiwcjICD09PYyM
-      jNDZ2dmaw3AKxWph7VZHUCjqgDIAxbpGGYCiJZw8eZJMJsPhw4fnfT40NMTw8PBl158/f35Z
-      +0yHDx/GcRyGhobKn7300kucOnVq3nVqDqBoCd/73vdob2/n4MGDHDhwgGQyiRCCyclJduzY
-      QaFQwOv1cvz4cXbu3Ek4HGZ8fJyRkREGBgbwer0MDQ0RjUYZGRkhl8uxZ88ezp07xwMPPMAT
-      TzyBbduMjY3R2dmJx+PBNM1yQRePx8PJkydVSKSiNUSjUU6ePMnAwAAnT54s7wv5/X4mJyc5
-      deoUHR0dbNy4sbx3lEwm6e3tZWxsjN27d5cVfNOmTQwODnL06FGklJimiaZpTExM4Pf7SaVS
-      aJpWXsZ+7rnnaGtr4+abb1YjgKI15PP5eTu+2Wy2HB/i9XpJp9MEAoHyrm2pxFPp+nw+j2VZ
-      5WtKx5tTqVR5ZLn++uvL9+u6jq7rCCFIp9PlDTZlAIp1zf8HUJpGZWfVI+gAAAAASUVORK5C
-      YII=
-    </thumbnail>
-    <thumbnail height='192' name='Dashboard 2' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAAA7DAAAOwwHHb6hk
-      AAACFUlEQVR4nO3TMQEAIAzAMMC/5yFjRxMFfXpnZg5Eve0A2GQA0gxAmgFIMwBpBiDNAKQZ
-      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
-      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQD
-      kGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBp
-      BiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA
-      0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDN
-      AKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxA
-      mgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZ
-      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
-      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKR9Y+0F
-      fBUOM1sAAAAASUVORK5CYII=
-    </thumbnail>
     <thumbnail height='192' name='Fosters By Zip Code' width='192'>
       iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAAA7DAAAOwwHHb6hk
       AAAgAElEQVR4nOy9V68k2XXv+dthMzPSZx5vyndVV3VXd3XTakRzSXEgiBJf7mDmYSAB9yPo
@@ -14466,6 +15109,360 @@
       1BnHKqGSxvcDrWZanFI3RnoB9CeB2K9ayC71I754kXHYHAOJ7zRNW2AcQ8XcRrlANnPp5LFu
       fpLmKn64kqRLvYmBripLPrnx8YYm0WnvwzIicvF9n8fnXQ42awuxeZI2rYhsxDLxQ5w23vi8
       h39XKhUymQyGYTAajZ47E/z/AfMhr680bQEGAAAAAElFTkSuQmCC
+    </thumbnail>
+    <thumbnail height='192' name='Fosters by Median Income' width='192'>
+      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
     </thumbnail>
   </thumbnails>
 </workbook>
