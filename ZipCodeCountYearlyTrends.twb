@@ -2200,8 +2200,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1800' minheight='1800' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='35' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='97916' id='34' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
+            <zone h='100000' id='37' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='97916' id='36' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
                 <zone fixed-size='280' h='48958' id='25' is-fixed='true' name='CatMap2019' w='28456' x='586' y='1042'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -2349,8 +2349,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1300' minheight='1300' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='23' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='97916' id='22' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
+            <zone h='100000' id='25' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='97916' id='24' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
                 <zone fixed-size='280' h='48958' id='3' is-fixed='true' name='CensusMap' w='66032' x='586' y='1042'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -2489,8 +2489,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1300' minheight='1300' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='28' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='97916' id='27' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
+            <zone h='100000' id='30' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='97916' id='29' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
                 <zone fixed-size='280' h='48958' id='3' is-fixed='true' name='CensusMap' w='66032' x='586' y='1042'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -2596,8 +2596,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='700' minheight='700' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='17' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='97916' id='16' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
+            <zone h='100000' id='19' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='97916' id='18' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
                 <zone fixed-size='280' h='48958' id='3' is-fixed='true' name='CatZipCounts' w='98828' x='586' y='1042'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -2802,7 +2802,7 @@
     </window>
     <window class='dashboard' maximized='true' name='ZipCodeResults'>
       <viewpoints />
-      <active id='26' />
+      <active id='-1' />
       <simple-id uuid='{BA03B57C-222B-4593-A35D-3B1C880B4FA7}' />
     </window>
     <window class='worksheet' hidden='true' name='CatMap2019'>
